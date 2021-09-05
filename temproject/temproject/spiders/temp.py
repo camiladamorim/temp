@@ -14,7 +14,7 @@ class TempSpider(scrapy.Spider):
 
     name = 'temp'
     allowed_domains = ['youtube.com']
-    start_urls = ['https://www.youtube.com/']
+    start_urls = ['https://www.youtube.com/results?search_query=tempest&sp=EgIQAg%253D%253D']
 
 
 
@@ -40,7 +40,7 @@ class TempSpider(scrapy.Spider):
 
 
 
-                    
+
             items['titulo'] = titulo
             items['descricao'] = descricao
             # items['url'] = url
@@ -54,29 +54,3 @@ class TempSpider(scrapy.Spider):
         if next_page is not None:
             yield response.follow(next_page, callback = self.parse)
 
-
-
-
-
-
-
-
-
-
-# #nome do canal
-# titulo =  
-
-# #descrição do canal
-# descricao =  
-
-# #url do canal
-# url =   
-
-# #base64 da imagem de perfil do canal
-# img =   
-
-# #a palavra chave utilizada na busca que encontrou o canal
-# query =   
-
-# #um identificador único para esse canal (sugestão, existe um campo "channelId" dentro da resposta do youtube)
-# id =   
