@@ -25,10 +25,16 @@ class TempSpider(scrapy.Spider):
         all_channels = response.xpath('//*/text()').extract()
         #response.xpath('//*/text()')[41].extract()
         #response.xpath('//*/text()')[40].extract()
+        
+        
+        for i in range(len(all_channels)):
+                if i==40:
+                        print("\n\n\n\n The Beggining: \n\n", all_channels[i],"\n\n The End \n\n")
 
-        yield {
-            'all_channels': all_channels
-        }
+
+        # yield {
+        #     'all_channels': all_channels
+        # }
 
 ####################################################################
 
