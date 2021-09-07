@@ -17,5 +17,3 @@ Programa Python que pegue informações de CANAIS de Youtube:
 . Retornar uma lista (array) contendo todos as informações extraídos dos canais encontrados (elimine infos duplicadas)
 
 Criar um fluxo secundário que vai adicionar o resultado da coleta de canais para um SQlite
-
-
