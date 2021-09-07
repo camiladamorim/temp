@@ -22,7 +22,9 @@ class TempSpider(scrapy.Spider):
 
     def parse(self, response):
         
-        response.xpath('//*/text()')[41].extract()
+        all_channel = response.xpath('//*/text()').extract()
+        #response.xpath('//*/text()')[41].extract()
+        #response.xpath('//*/text()')[40].extract()
 
         yield {
             'all_channels': all_channels
