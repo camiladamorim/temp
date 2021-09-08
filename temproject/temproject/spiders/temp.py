@@ -1,5 +1,6 @@
 
 import scrapy
+import re
 # from ...items import TemprojectItem
 
 
@@ -22,19 +23,23 @@ class TempSpider(scrapy.Spider):
 
     def parse(self, response):
         
-        all_channels = response.xpath('//*/text()').extract()  
+        general_response = response.xpath('//*/text()').extract()  
         #response.xpath('//*/text()')[41].extract()
         #response.xpath('//*/text()')[40].extract()
         
         
-        for i in range(len(all_channels)):
+        for i in range(len(general_response)):
                 if i==40:
-                        print("\n\n\n\n The Beggining: \n\n", all_channels[i],"\n\n The End \n\n")
+                        str_channels=general_response[i]
+                        list_channels=re.split('channelRenderer', str_channels)
+                        list_channel_1=re.split('\,', list_channels[1])
+                        
                         
 
-        # yield {
-        #     'all_channels': all_channels
-        # }
+        yield {
+            'list_channel_1': list_channel_1[2],
+        #     'type_list_channels': type(list_channels)
+        }
 
 ####################################################################
 

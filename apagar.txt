@@ -56,3 +56,6 @@
 
 ## tokenize a resposta em partes que começam com "channelRenderer" e terminam em }}}]}}}
 ## dai para cada parte dessa ( que corresponde a um video) tokenize nas virgulas(para pegas as infos dos videos)
+
+
+# import scrapy, nltk(tokenize)
