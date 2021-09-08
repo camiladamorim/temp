@@ -34,16 +34,40 @@ class TempSpider(scrapy.Spider):
                         list_channel_1=re.split('\,', list_channels[1])
                         for element in list_channel_1:
                                 if "shortBylineText" in element:
-                                        #title =re.search("(\"text\"\:)(.*)", element)
-                                        ###title =re.split("(\"(.*)\"\:)(.*)", element)
-                                        title =re.split("(\"text\"\:)", element)[2]
-                        
+                                        titulo =re.split("(\"text\"\:)", element)[2]
+                                        
+                                if "descriptionSnippet" in element: #
+                                        descricao =re.split("(\"text\"\:)", element)[2]
+
+                                if "url" in element: 
+                                        url = re.split("(\"url\"\:)", element)[2]
+
+                                if "thumbnails" in element:
+                                        img = re.split("(\"url\"\:)", element)[2]
+
+                                if "searchEndpoint" in element:
+                                        query = str(re.split("^query(.*)", element)[0])
+                                        if "query" in query:
+                                                query = re.split("query\"\:\"", query)[1]
+
+                                if "channelId" in element:
+                                        id_ = str(re.split("^channelId(.*)", element)[0])
+                                        if "channelId" in id_:
+                                                id_ = re.split("channelId\"\:\"", id_)[1]
+
+                                # if "channelId" in element:
+                                #         id_ =re.split("(\"channelId\"\:)", element)
+
                         
 
         yield {
-                'title': title
-        #     'list_channel_1': list_channel_1[2],
-        #     'type_list_channels': type(list_channels)
+                'titulo': titulo,
+                'descricao': descricao,
+                'url': url,
+                'img': img,
+                'query': query,
+                'id_': id_
+
         }
 
 ####################################################################
