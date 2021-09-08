@@ -8,15 +8,12 @@ class TempSpider(scrapy.Spider):
 
         name = 'temp'
         allowed_domains = ['youtube.com']
-        start_urls = ['https://www.youtube.com/results?search_query=tempest&sp=EgIQAg%253D%253D'] #so o 1 termo
 
-
-        # lista_canais = ['tempest', 'youtube', 'estrela']
-        # for item in lista_canais:
-        #     url='https://www.youtube.com/results?search_query='+item+'&sp=EgIQAg%253D%253D'
-        #     start_urls = [url]
-
-
+        start_urls=[]
+        keywords = ['tempest', 'youtube', 'estrela']
+        for keyword in keywords:
+            url='https://www.youtube.com/results?search_query='+keyword+'&sp=EgIQAg%253D%253D'
+            start_urls.append(url)
 
 
         def parse(self, response):
