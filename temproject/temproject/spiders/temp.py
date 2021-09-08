@@ -12,8 +12,6 @@ class TempSpider(scrapy.Spider):
 
 
     # lista_canais = ['tempest', 'youtube', 'estrela']
-    # name = 'temp'
-    # allowed_domains = ['youtube.com']
     # for item in lista_canais:
     #     url='https://www.youtube.com/results?search_query='+item+'&sp=EgIQAg%253D%253D'
     #     start_urls = [url]
@@ -25,8 +23,6 @@ class TempSpider(scrapy.Spider):
         
         general_response = response.xpath('//*/text()').extract()  
 
-
-        #response.xpath('//*/text()')[40].extract() 
         for i in range(len(general_response)):
                 if i==40:
                         str_channels=general_response[i]
@@ -54,10 +50,6 @@ class TempSpider(scrapy.Spider):
                                         id_ = str(re.split("^channelId(.*)", element)[0])
                                         if "channelId" in id_:
                                                 id_ = re.split("channelId\"\:\"", id_)[1]
-
-                                # if "channelId" in element:
-                                #         id_ =re.split("(\"channelId\"\:)", element)
-
                         
 
         yield {
@@ -67,7 +59,6 @@ class TempSpider(scrapy.Spider):
                 'img': img,
                 'query': query,
                 'id_': id_
-
         }
 
 ####################################################################
