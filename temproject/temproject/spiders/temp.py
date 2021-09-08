@@ -24,14 +24,12 @@ class TempSpider(scrapy.Spider):
                         if i == 40:
                                 str_channels = general_response[i]
                                 list_all_channels = re.split('channelRenderer', str_channels) 
-                                #print("\n\n\n\n",list_all_channels)
+
 
                 items = []
-                titulo, descricao, url, img, query, id_= '','','','','',''
-                                
+                titulo, descricao, url, img, query, id_= '','','','','',''      
                 for channel in list_all_channels:
                         items_inside_each_channel = re.split('\,', channel)
-
                         for item in items_inside_each_channel:
                                 if "shortBylineText" in item:
                                         titulo = re.split("(\"text\"\:)", item)[2]
@@ -64,11 +62,11 @@ class TempSpider(scrapy.Spider):
                                 'id_': id_ 
                                 }
 
-                        items.append(str(json_item))
+                        items.append(json_item)
 
-                print(items)
-                # yield {items}
-
+                #print(items)
+                #yield {items}
+                return iter(items)
 
 
 
