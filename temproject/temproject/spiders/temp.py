@@ -24,20 +24,25 @@ class TempSpider(scrapy.Spider):
     def parse(self, response):
         
         general_response = response.xpath('//*/text()').extract()  
-        #response.xpath('//*/text()')[41].extract()
-        #response.xpath('//*/text()')[40].extract()
-        
-        
+
+
+        #response.xpath('//*/text()')[40].extract() 
         for i in range(len(general_response)):
                 if i==40:
                         str_channels=general_response[i]
                         list_channels=re.split('channelRenderer', str_channels)
                         list_channel_1=re.split('\,', list_channels[1])
+                        for element in list_channel_1:
+                                if "shortBylineText" in element:
+                                        #title =re.search("(\"text\"\:)(.*)", element)
+                                        ###title =re.split("(\"(.*)\"\:)(.*)", element)
+                                        title =re.split("(\"text\"\:)", element)[2]
                         
                         
 
         yield {
-            'list_channel_1': list_channel_1[2],
+                'title': title
+        #     'list_channel_1': list_channel_1[2],
         #     'type_list_channels': type(list_channels)
         }
 
