@@ -1,7 +1,6 @@
 
 import scrapy
 import re
-# from ...items import TemprojectItem
 
 
 class TempSpider(scrapy.Spider):
@@ -65,5 +64,6 @@ class TempSpider(scrapy.Spider):
                         items.append(json_item)
                         
                 #yield {items}
-                return iter(items)
+                #return iter(items)
+                return items
 
