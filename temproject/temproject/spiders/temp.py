@@ -62,6 +62,6 @@ class TempSpider(scrapy.Spider):
                         }
 
                         items.append(json_item)
-                #yield items[0]
+                # no pipelines used until fix
                 # yield {items}
-                return iter(items)
+                # return iter(items)
