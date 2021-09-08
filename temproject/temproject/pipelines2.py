@@ -14,14 +14,13 @@ class TemprojectPipeline(object):
     def create_table(self):
 
         self.curr.execute(""" DROP TABLE IF EXISTS items_tb """)
-
         self.curr.execute("""
             create table items_tb(
                 titulo text,
                 descricao text,
                 url text, 
                 img text, 
-                query ext, 
+                query text, 
                 id_ text) """)
 
     def process_item(self, item, spider):
@@ -32,5 +31,4 @@ class TemprojectPipeline(object):
     def store_db(self, item):
         self.curr.execute(""" INSERT INTO items_tb VALUES (?,?,?,?,?,?) """
         (item['titulo'],item['descricao'],item['url'],item['img'],item['query'],item['id_']))
-        
         self.conn.commit()

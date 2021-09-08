@@ -63,7 +63,5 @@ class TempSpider(scrapy.Spider):
 
                         items.append(json_item)
                         
-                #yield {items}
-                #return iter(items)
-                return items
-
+                # yield {items}
+                return iter(items)
