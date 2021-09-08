@@ -59,9 +59,9 @@ class TempSpider(scrapy.Spider):
                                 'img': img,
                                 'query': query,
                                 'id_': id_ 
-                                }
+                        }
 
                         items.append(json_item)
-                        
+                #yield items[0]
                 # yield {items}
                 return iter(items)

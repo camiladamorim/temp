@@ -5,14 +5,12 @@ curr = conn.cursor()
 
 
 curr.execute("""
-        create table items_tb(
-            titulo text,
+        insert into items_tb values(titulo text,
             descricao text,
             url text, 
             img text, 
             query ext, 
-            id_ text)
-            """)
+            id_ text)""")
 
 conn.commit()
 conn.close()
