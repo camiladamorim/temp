@@ -63,24 +63,7 @@ class TempSpider(scrapy.Spider):
                                 }
 
                         items.append(json_item)
-
-                #print(items)
+                        
                 #yield {items}
                 return iter(items)
 
-
-
-                # yield {
-                #         'titulo': titulo,
-                #         'descricao': descricao,
-                #         'url': url,
-                #         'img': img,
-                #         'query': query,
-                #         'id_': id_
-                # }
-
-
-        # #mod
-        # next_page = response.css('li.next a::attr(href)').get()
-        # if next_page is not None:
-        #     yield response.follow(next_page, callback = self.parse)
