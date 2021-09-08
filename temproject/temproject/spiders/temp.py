@@ -61,28 +61,6 @@ class TempSpider(scrapy.Spider):
                         'id_': id_
                 }
 
-        ####################################################################
-
-        # for div_quote in all_channels:
-
-        #     titulo = div_quote.css('span.text::text').extract() #nome do canal
-        #     descricao = div_quote.css('span.text::text').extract() #descrição do canal
-        #     # url = div_quote.css('span.text::text').extract() #url do canal
-        #     # img = div_quote.css('span.text::text').extract() #base64 da imagem de perfil do canal
-        #     # query = div_quote.css('span.text::text').extract() #a palavra chave utilizada na busca que encontrou o canal
-        #     # id_ = div_quote.css('span.text::text').extract() #um identificador único para esse canal (sugestão, existe um campo "channelId" dentro da resposta do youtube)
-        #     # use o href por ex:class="channel-link yt-simple-endpoint style-scope ytd-channel-renderer"
-
-
-        #     items['titulo'] = titulo
-        #     items['descricao'] = descricao
-        #     # items['url'] = url
-        #     # items['img'] = img
-        #     # items['query'] = query
-        #     # items['id'] = id_
-
-        #     yield items
-
 
         # #mod
         # next_page = response.css('li.next a::attr(href)').get()
