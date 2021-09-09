@@ -33,7 +33,7 @@ class TempSpider(scrapy.Spider):
                                         titulo = re.split("(\"text\"\:)", item)[2]
                                         
                                 if "descriptionSnippet" in item: #
-                                        descricao = re.split("(\"text\"\:)", item)[2]
+                                        descricao = str(re.split("(\"text\"\:)", item)[2:][0])
 
                                 if "url" in item: 
                                         url = re.split("(\"url\"\:)", item)[2]
@@ -44,7 +44,7 @@ class TempSpider(scrapy.Spider):
                                 if "searchEndpoint" in item:
                                         query = str(re.split("^query(.*)", item)[0])
                                         if "query" in query:
-                                                query = re.split("query\"\:\"", query)[1]
+                                                query = re.split("query\"\:\"", query)[1][:-1]
 
                                 if "channelId" in item:
                                         id_ = str(re.split("^channelId(.*)", item)[0])
