@@ -1,7 +1,7 @@
 
 import scrapy
 import re
-from ..items import TemprojectItem
+
 
 class TempSpider(scrapy.Spider):
 
@@ -13,10 +13,10 @@ class TempSpider(scrapy.Spider):
         for keyword in keywords:
             url='https://www.youtube.com/results?search_query='+keyword+'&sp=EgIQAg%253D%253D'
             start_urls.append(url)
-        
+
 
         def parse(self, response):
-                items = TemprojectItem()
+
                 general_response = response.xpath('//*/text()').extract()  
 
                 for i in range(len(general_response)):
@@ -25,7 +25,7 @@ class TempSpider(scrapy.Spider):
                                 list_all_channels = re.split('channelRenderer', str_channels) 
 
 
-                #items = []
+                items = []
                 titulo, descricao, url, img, query, id_= '','','','','',''      
                 for channel in list_all_channels:
                         items_inside_each_channel = re.split('\,', channel)
@@ -52,25 +52,16 @@ class TempSpider(scrapy.Spider):
                                         if "channelId" in id_:
                                                 id_ = re.split("channelId\"\:\"", id_)[1]
                         
+                        json_item = {
+                                'titulo': titulo,
+                                'descricao': descricao,
+                                'url': url,
+                                'img': img,
+                                'query': query,
+                                'id_': id_ 
+                        }
 
-                        items['titulo'] = titulo
-                        items['descricao'] = descricao
-                        items['url'] = url
-                        items['img'] = img
-                        items['query'] = query
-                        items['id_'] = id_
-
-
-                        # json_item = {
-                        #         'titulo': titulo,
-                        #         'descricao': descricao,
-                        #         'url': url,
-                        #         'img': img,
-                        #         'query': query,
-                        #         'id_': id_ 
-                        # }
-
-                       # items.append(json_item)
+                        items.append(json_item)
                 # no pipelines used until fix
-                yield {items}
-                #return iter(items)
+                # yield {items}
+                return iter(items)
