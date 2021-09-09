@@ -1,5 +1,5 @@
-Instruções
-Programa Python que pegue informações de CANAIS de Youtube:
+## Instruções
+### Programa Python que pegue informações de CANAIS de Youtube:
 . Iterar pela lista de palavras chave: [tempest, youtube, estrela]
 
 . Para cada palavra chave nesta lista realizar uma busca no site do Youtube por canais
