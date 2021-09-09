@@ -3,6 +3,7 @@ import scrapy
 import re
 from ..items import TemprojectItem
 
+
 class TempSpider(scrapy.Spider):
 
         name = 'temp'
@@ -24,8 +25,7 @@ class TempSpider(scrapy.Spider):
                                 str_channels = general_response[i]
                                 list_all_channels = re.split('channelRenderer', str_channels) 
 
-
-                #items = []
+                placeholder=[]
                 titulo, descricao, url, img, query, id_= '','','','','',''      
                 for channel in list_all_channels:
                         items_inside_each_channel = re.split('\,', channel)
@@ -61,6 +61,13 @@ class TempSpider(scrapy.Spider):
                         items['id_'] = id_
 
 
+                        yield items
+                #return iter(items)
+
+
+
+
+
                         # json_item = {
                         #         'titulo': titulo,
                         #         'descricao': descricao,
@@ -69,8 +76,3 @@ class TempSpider(scrapy.Spider):
                         #         'query': query,
                         #         'id_': id_ 
                         # }
-
-                       # items.append(json_item)
-                # no pipelines used until fix
-                yield {items}
-                #return iter(items)
