@@ -3,7 +3,6 @@ import scrapy
 import re
 from ..items import TemprojectItem
 
-
 class TempSpider(scrapy.Spider):
 
         name = 'temp'
@@ -62,17 +61,3 @@ class TempSpider(scrapy.Spider):
 
 
                         yield items
-                #return iter(items)
-
-
-
-
-
-                        # json_item = {
-                        #         'titulo': titulo,
-                        #         'descricao': descricao,
-                        #         'url': url,
-                        #         'img': img,
-                        #         'query': query,
-                        #         'id_': id_ 
-                        # }
