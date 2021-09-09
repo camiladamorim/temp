@@ -5,15 +5,12 @@ SPIDER_MODULES = ['temproject.spiders']
 NEWSPIDER_MODULE = 'temproject.spiders'
 
 
-ROBOTSTXT_OBEY = True
-
+ROBOTSTXT_OBEY = False
 
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+    'temproject.middlewares.CustomMiddleware': 543,
 }
 
-
 ITEM_PIPELINES = {
-   'amazonbot.pipelines.AmazonbotPipeline': 300,
+   'temproject.pipelines.TemprojectPipeline': 300,
 }

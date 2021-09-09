@@ -1,82 +1,63 @@
 
-
-# lista = [tempest, youtube, estrela]
-
-# for item in lista:
-#     print("item")
-
-
 import scrapy
-from ...items import TemprojectItem
-
+import re
+from ..items import TemprojectItem
 
 class TempSpider(scrapy.Spider):
 
-    name = 'temp'
-    allowed_domains = ['youtube.com']
-    start_urls = ['https://www.youtube.com/']
+        name = 'temp'
+        allowed_domains = ['youtube.com']
+
+        start_urls=[]
+        keywords = ['tempest', 'youtube', 'estrela']
+        for keyword in keywords:
+            url='https://www.youtube.com/results?search_query='+keyword+'&sp=EgIQAg%253D%253D'
+            start_urls.append(url)
+        
+
+        def parse(self, response):
+                items = TemprojectItem()
+                general_response = response.xpath('//*/text()').extract()  
+
+                for i in range(len(general_response)):
+                        if i == 40:
+                                str_channels = general_response[i]
+                                list_all_channels = re.split('channelRenderer', str_channels) 
+
+                placeholder=[]
+                titulo, descricao, url, img, query, id_= '','','','','',''      
+                for channel in list_all_channels:
+                        items_inside_each_channel = re.split('\,', channel)
+                        for item in items_inside_each_channel:
+                                if "shortBylineText" in item:
+                                        titulo = re.split("(\"text\"\:)", item)[2]
+                                        
+                                if "descriptionSnippet" in item: #
+                                        descricao = str(re.split("(\"text\"\:)", item)[2:][0])
+
+                                if "url" in item: 
+                                        url = re.split("(\"url\"\:)", item)[2]
+
+                                if "thumbnails" in item:
+                                        img = re.split("(\"url\"\:)", item)[2]
+
+                                if "searchEndpoint" in item:
+                                        query = str(re.split("^query(.*)", item)[0])
+                                        if "query" in query:
+                                                query = re.split("query\"\:\"", query)[1][:-1]
+
+                                if "channelId" in item:
+                                        id_ = str(re.split("^channelId(.*)", item)[0])
+                                        if "channelId" in id_:
+                                                id_ = re.split("channelId\"\:\"", id_)[1]
+                        
+
+                        items['titulo'] = titulo
+                        items['descricao'] = descricao
+                        items['url'] = url
+                        items['img'] = img
+                        items['query'] = query
+                        items['id_'] = id_
 
 
-
-    
-
-    def parse(self, response):
-        #title = response.css('#product-widget-title').extract()
-        items = TemprojectItem()
-        # title = response.css('.text::text').extract()
-        all_div_quotes = response.css('div.quote')
-
-
-        for div_quote in all_div_quotes:
-
-            titulo = div_quote.css('span.text::text').extract() #nome do canal
-            descricao = div_quote.css('span.text::text').extract() #descrição do canal
-            # url = div_quote.css('span.text::text').extract() #url do canal
-            # img = div_quote.css('span.text::text').extract() #base64 da imagem de perfil do canal
-            # query = div_quote.css('span.text::text').extract() #a palavra chave utilizada na busca que encontrou o canal
-
-            # id_ = div_quote.css('span.text::text').extract() #um identificador único para esse canal (sugestão, existe um campo "channelId" dentro da resposta do youtube)
-            # use o href por ex:class="channel-link yt-simple-endpoint style-scope ytd-channel-renderer"
-
-
-
-                    
-            items['titulo'] = titulo
-            items['descricao'] = descricao
-            # items['url'] = url
-            # items['img'] = img
-            # items['query'] = query
-            # items['id'] = id_
-
-            yield items
-        #mod
-        next_page = response.css('li.next a::attr(href)').get()
-        if next_page is not None:
-            yield response.follow(next_page, callback = self.parse)
-
-
-
-
-
-
-
-
-
-
-# #nome do canal
-# titulo =  
-
-# #descrição do canal
-# descricao =  
-
-# #url do canal
-# url =   
-
-# #base64 da imagem de perfil do canal
-# img =   
-
-# #a palavra chave utilizada na busca que encontrou o canal
-# query =   
-
-# #um identificador único para esse canal (sugestão, existe um campo "channelId" dentro da resposta do youtube)
-# id =   
+                        yield items
