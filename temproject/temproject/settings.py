@@ -11,6 +11,6 @@ DOWNLOADER_MIDDLEWARES = {
     'temproject.middlewares.CustomMiddleware': 543,
 }
 
-# ITEM_PIPELINES = {
-#    'temproject.pipelines.TemprojectPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'temproject.pipelines.TemprojectPipeline': 300,
+}
